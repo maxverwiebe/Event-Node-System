@@ -1,0 +1,13 @@
+EventAutomation:RegisterNewOption("cleanup")
+    :SetName("Cleanup")
+    :SetColor(Color(255,214,78))
+    :SetCategory("Map")
+    :RestrictAdmin(true)
+    :SetDescription("Changes the gravity globally for players. Default = 600.")
+    :AddAttribute("number", "VALUE", 600, false)
+    :SetServerCallback(function(attributes)
+        RunConsoleCommand("sv_gravity",attributes["VALUE"])
+    end)
+    :SetClientCallback(function(attributes)
+        -- client side code here
+    end)

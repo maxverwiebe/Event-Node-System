@@ -1,0 +1,65 @@
+EventAutomation:RegisterNewOption("visuals_sound")
+    :SetName("Sound")
+    :SetColor(Color(240,172,255))
+    :SetCategory("Visuals")
+    :AddAttribute("string", "SOUND_PATH", "shystudios/st/computer/alert16.wav", true, 4)
+    :TriggerClientside(true)
+    :SetServerCallback(function(attributes)
+
+        end)
+    :SetClientCallback(function(attributes)
+        surface.PlaySound(attributes["SOUND_PATH"])
+    end)
+
+EventAutomation:RegisterNewOption("visuals_message")
+    :SetName("Message")
+    :SetColor(Color(240,172,255))
+    :SetCategory("Visuals")
+    :AddAttribute("color", "PREFIX_COLOR", Color(255,255,255), false, 1)
+    :AddAttribute("string", "PREFIX", "true", false, 2)
+    :AddAttribute("color", "MESSAGE_COLOR", Color(255,255,255), false, 3)
+    :AddAttribute("string", "MESSAGE", "true", false, 4)
+    :TriggerClientside(true)
+    :SetServerCallback(function(attributes)
+        --
+        end)
+    :SetClientCallback(function(attributes)
+        local prefixColor = attributes["PREFIX_COLOR"]
+        prefixColor = Color(prefixColor.r, prefixColor.g, prefixColor.b)
+        local prefix = attributes["PREFIX"]
+        local msgColor = attributes["MESSAGE_COLOR"]
+        msgColor = Color(msgColor.r, msgColor.g, msgColor.b)
+        local msg = attributes["MESSAGE"]
+
+        chat.AddText(prefixColor, prefix, Color(90,90,90)," » ", msgColor, msg)
+    end)
+
+EventAutomation:RegisterNewOption("visuals_shake")
+    :SetName("Screen Shake")
+    :SetColor(Color(240,172,255))
+    :SetCategory("Visuals")
+    :AddAttribute("number", "AMPLITUDE", 5, false, 1)
+    :AddAttribute("number", "FREQUENCY", 5, false, 1)
+    :AddAttribute("number", "DURATION", 10, false, 1)
+    :TriggerClientside(true)
+    :SetServerCallback(function(attributes)
+
+        end)
+    :SetClientCallback(function(attributes)
+        util.ScreenShake(LocalPlayer():GetPos(), attributes["AMPLITUDE"], attributes["FREQUENCY"], attributes["DURATION"], 100)
+    end)
+
+EventAutomation:RegisterNewOption("visuals_screenfade")
+    :SetName("Screen Fade")
+    :SetColor(Color(240,172,255))
+    :SetCategory("Visuals")
+    :AddAttribute("color", "COLOR", Color(255,255,255), false, 1)
+    :AddAttribute("number", "FADE_TIME", 0.3, false, 1)
+    :AddAttribute("number", "FADE_HOLD", 1, false, 1)
+    :TriggerClientside(true)
+    :SetServerCallback(function(attributes)
+
+        end)
+    :SetClientCallback(function(attributes)
+        LocalPlayer():ScreenFade(SCREENFADE.IN, attributes["COLOR"], attributes["FADE_TIME"], attributes["FADE_TIME"])
+    end)
